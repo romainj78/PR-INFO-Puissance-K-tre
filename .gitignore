@@ -1,0 +1,8 @@
+main
+*.o
+*.log
+*.ppu
+bin/
+out/
+usr/ 
+.DS_STORE

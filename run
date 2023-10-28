@@ -1,0 +1,17 @@
+#!/bin/bash
+
+entryPoint="main";
+version=$1;
+
+# compile pascal file
+fpc $entryPoint.pas;
+
+# quick clearing of the terminal
+clear;
+
+# then run the version we want
+case $version in 
+    dev) ./$entryPoint;;
+    prod) ./$entryPoint;;
+    *) ./$entryPoint;;
+esac;
