@@ -1,17 +1,52 @@
 #!/bin/bash
 
-entryPoint="main";
-version=$1;
+(
+# Colors for terminal
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
 
-# compile pascal file
-fpc $entryPoint.pas;
+# Logging timestamp
+echo -e "${CYAN}---------------------------------------------------" 
+echo -e "Execution timestamp: $(date)" 
+echo -e "---------------------------------------------------${NC}" 
+echo 
 
-# quick clearing of the terminal
-clear;
+# Entry point of the application and version to be executed
+entryPoint="main"
+version=$1
 
-# then run the version we want
+# We first delete the previouses complied files
+find . -name "*.o" -type f -delete 
+find . -name "*ppu" -type f -delete 
+rm -f main 
+
+# Then we compile pascal file
+fpc $entryPoint.pas
+
+# We just do a quick clearing of the terminal
+echo "-----"
+echo 
+clear 
+
+# And finally we run the version we want
+success=true
 case $version in 
-    dev) ./$entryPoint;;
-    prod) ./$entryPoint;;
-    *) ./$entryPoint;;
-esac;
+    dev) ./$entryPoint || success=false;;
+    prod) ./$entryPoint || success=false;;
+    *) ./$entryPoint || success=false;;
+esac
+
+# At the end, we print whether it's successful or not
+echo 
+echo "-----"
+if $success ; then
+    echo -e "${GREEN}Program sucessfully executed.${NC}"
+else
+    echo -e "${RED}Program exited with error.${NC}"
+fi
+echo 
+
+# Logging the execution into hidden file ".log"
+) 2>&1 | tee -a ".log"

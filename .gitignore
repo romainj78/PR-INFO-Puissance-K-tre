@@ -1,8 +1,10 @@
 main
 *.o
 *.log
+*.out
 *.ppu
 bin/
 out/
 usr/ 
 .DS_STORE
+.vscode/
