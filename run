@@ -22,8 +22,11 @@ find . -name "*.o" -type f -delete
 find . -name "*ppu" -type f -delete 
 rm -f main 
 
+export LIBRARY_PATH=/usr/local/lib
+export LD_LIBRARY_PATH=/usr/local/lib
+
 # Then we compile pascal file
-fpc $entryPoint.pas
+fpc $entryPoint.pas 
 
 # We just do a quick clearing of the terminal
 echo "-----"

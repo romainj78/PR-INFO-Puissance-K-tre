@@ -2,7 +2,9 @@ unit afficher;
 
 interface
 
-uses types;
+uses 
+    types,
+    sdl2 in 'affichage/SDL/units/sdl2.pas';
 
 procedure affichage(grilleJeu: Grille);
 procedure ecranVictoire(joueur: Integer);

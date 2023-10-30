@@ -7,7 +7,8 @@ uses
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas',
-    choixMode in 'jeu/choixMode.pas';
+    choixMode in 'jeu/choixMode.pas',
+    afficher in 'affichage/afficher.pas';
 
 procedure jouer(modeJeu: Integer);
 procedure surprise(grilleJeu: Grille);
