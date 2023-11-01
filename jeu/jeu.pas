@@ -43,6 +43,7 @@ begin
     col := choixColonne() - 1;
     placerPion(col);
     changementJoueur();
+    checkVictoire();
 end;
 
 procedure surprise();

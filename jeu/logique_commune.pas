@@ -4,10 +4,10 @@ interface
 
 uses types;
 
-procedure checkVictoire(grilleJeu: Grille; var victoire: Boolean);
-function checkColonne(grilleJeu: Grille; x, y: Integer): Boolean;
-function checkLigne(grilleJeu: Grille; x, y: Integer): Boolean;
-function checkDiago(grilleJeu: Grille; x, y: Integer): Boolean;
+procedure checkVictoire();
+function checkColonne(): Boolean;
+function checkLigne(): Boolean;
+function checkDiago(): Boolean;
 function choixColonne(): ShortInt;
 procedure changementJoueur();
 function colonnePleine(col: Integer): Boolean;
@@ -15,24 +15,55 @@ procedure placerPion(col: Integer);
 
 implementation
 
-procedure checkVictoire(grilleJeu: Grille; var victoire: Boolean);
+procedure checkVictoire();
 begin
+    if checkColonne() or checkLigne() or checkDiago() then
+        app.victoire := true;
 
+    writeln(app.victoire);
 end;
 
-function checkColonne(grilleJeu: Grille; x, y: Integer): Boolean;
+function checkColonne(): Boolean;
+var i, j, k, qte, val: ShortInt;
 begin
+    // on initialise la valeur de retour à false
+    checkColonne := false;
 
+    // si on trouve une colonne avec n piosn alignés, on passe la valeur à true
+    // on parcourt toutes les colonnes
+    for j:=0 to app.largeurGrille-1 do begin   
+        for i:=0 to app.hauteurGrille - app.n do begin // ligne de départ (on retire n pour ne pas dépasser de la grille)
+            qte := 0;
+            val := app.grilleJeu[0][j];
+            
+            if val <> CASE_VIDE then begin // on vérifie que la première case ne soit pas une case vide 
+                for k:=i to i + app.n do // on parcourt les n lignes au-dessus pour voir si les pions se succèdent
+                    if app.grilleJeu[k][j] = val then // on compte le nombre de même symbole d'affilée
+                        qte := qte+1
+                    else 
+                        break;
+            end;
+
+            // on peut sortir plus tôt de la boucle
+            if qte = app.n then begin 
+                checkColonne := true;
+                break;
+            end;
+        end;
+
+        // on peut sortir plus tôt de la boucle
+        if checkColonne then break;     
+    end;
 end;
 
-function checkLigne(grilleJeu: Grille; x, y: Integer): Boolean;
+function checkLigne(): Boolean;
 begin
-
+    checkLigne := false;
 end;
 
-function checkDiago(grilleJeu: Grille; x, y: Integer): Boolean;
+function checkDiago(): Boolean;
 begin
-
+    checkDiago := false;
 end;
 
 function choixColonne(): ShortInt;
