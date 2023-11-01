@@ -35,6 +35,10 @@ begin
             MODE_SOLO: solo();
         end;
     end;
+
+    affichage();
+    changementJoueur();
+    ecranVictoire();
 end;
 
 procedure unContreUn();

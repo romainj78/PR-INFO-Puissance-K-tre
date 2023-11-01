@@ -19,8 +19,6 @@ procedure checkVictoire();
 begin
     if checkColonne() or checkLigne() or checkDiago() then
         app.victoire := true;
-
-    writeln(app.victoire);
 end;
 
 function checkColonne(): Boolean;
