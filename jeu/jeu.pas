@@ -40,19 +40,9 @@ end;
 procedure unContreUn();
 var col: ShortInt;
 begin
-    repeat
-        write('Joueur ', app.joueur, ', c''est à ton tour ! Quelle colonne choisis-tu ? ');
-        readln(col);
-    until (col >= 0) and (col <= app.largeurGrille) and (not colonnePleine(col));
-
-    // on change de joueur
-    if (app.joueur = JOUEUR_2) or (app.joueur = JOUEUR_ORDI) then  
-        app.joueur := JOUEUR_1
-    else 
-        if (app.modeJeu = MODE_SOLO) or (app.modeJeu = MODE_SOLO_DIFF) then
-            app.joueur := JOUEUR_ORDI
-        else
-            app.joueur := JOUEUR_2;
+    col := choixColonne() - 1;
+    placerPion(col);
+    changementJoueur();
 end;
 
 procedure surprise();
