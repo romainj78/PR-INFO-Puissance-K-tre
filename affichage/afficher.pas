@@ -7,7 +7,7 @@ uses
     sdl2 in 'affichage/SDL/units/sdl2.pas';
 
 procedure affichage();
-procedure ecranVictoire(joueur: Integer);
+procedure ecranVictoire();
 procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
 
@@ -52,9 +52,15 @@ begin
     }
 end;
 
-procedure ecranVictoire(joueur: Integer);
+procedure ecranVictoire();
 begin
+    app.etape := ETAPE_FIN;
     
+    writeln();
+    if app.victoire then
+        writeln('Bravo Joueur ', app.joueur, ' ! Tu gagnes la partie !')
+    else    
+        writeln('Match nul...');
 end;
 
 procedure afficherGrille();

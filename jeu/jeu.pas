@@ -26,7 +26,7 @@ begin
         placerPieges();
 
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
-    while not app.victoire do begin
+    while (not app.victoire) and (not grillePleine()) do begin
         affichage(); // affichage de la grille
 
         case app.modeJeu of 
@@ -35,6 +35,10 @@ begin
             MODE_SOLO: solo();
         end;
     end;
+
+    affichage();
+    changementJoueur();
+    ecranVictoire();
 end;
 
 procedure unContreUn();
