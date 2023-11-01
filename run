@@ -52,4 +52,5 @@ fi
 echo 
 
 # Logging the execution into hidden file ".log"
-) 2>&1 | tee -a ".log"
+)
+# ) 2>&1 | tee -a 2&1 ".log"
