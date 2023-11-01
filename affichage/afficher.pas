@@ -6,14 +6,14 @@ uses
     types,
     sdl2 in 'affichage/SDL/units/sdl2.pas';
 
-procedure affichage(grilleJeu: Grille);
+procedure affichage();
 procedure ecranVictoire(joueur: Integer);
 procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
 
 implementation
 
-procedure affichage(grilleJeu: Grille);
+procedure affichage();
 begin
     
 end;

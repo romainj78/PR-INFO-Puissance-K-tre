@@ -9,7 +9,7 @@ function checkColonne(grilleJeu: Grille; x, y: Integer): Boolean;
 function checkLigne(grilleJeu: Grille; x, y: Integer): Boolean;
 function checkDiago(grilleJeu: Grille; x, y: Integer): Boolean;
 procedure choixColonne(var joueur: Integer; var grilleJeu: Grille);
-function colonnePleine(grilleJeu: Grille; x, y: Integer): Boolean;
+function colonnePleine(x: Integer): Boolean;
 procedure placerPion(x, y: Integer; joueur: Integer; var grilleJeu: Grille);
 
 implementation
@@ -39,9 +39,9 @@ begin
 
 end;
 
-function colonnePleine(grilleJeu: Grille; x, y: Integer): Boolean;
+function colonnePleine(x: Integer): Boolean;
 begin
-
+    colonnePleine := false;
 end;
 
 procedure placerPion(x, y: Integer; joueur: Integer; var grilleJeu: Grille);

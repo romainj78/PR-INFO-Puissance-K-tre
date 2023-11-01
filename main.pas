@@ -18,5 +18,6 @@ begin
 
   choixMode();
   choixN();
+  jouer();
 
 end.  

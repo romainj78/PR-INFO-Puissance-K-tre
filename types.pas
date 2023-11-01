@@ -20,6 +20,7 @@ const JOUEUR_1 = 1;
 const JOUEUR_2 = 2;
 const JOUEUR_ORDI = 3;
 
+const CASE_VIDE = 0;
 const PION_J1 = 1;
 const PION_J2 = 2;
 const PION_ORDI = 3;
@@ -31,8 +32,11 @@ type Jeu = record
     etape: ShortInt;
     n: ShortInt;
     modeJeu: ShortInt;
+    joueur: ShortInt;
     grilleJeu: Grille;
     grillePiegee: Grille;
+    largeurGrille: ShortInt;
+    hauteurGrille: ShortInt;
     victoire: Boolean;
     affichage: record
         textures: Array[1..MAX_ITER] of PSDL_Texture;
