@@ -29,15 +29,15 @@ begin
     // on initialise la valeur de retour à false
     checkColonne := false;
 
-    // si on trouve une colonne avec n piosn alignés, on passe la valeur à true
+    // si on trouve une colonne avec n pions alignés, on passe la valeur à true
     // on parcourt toutes les colonnes
     for j:=0 to app.largeurGrille-1 do begin   
         for i:=0 to app.hauteurGrille - app.n do begin // ligne de départ (on retire n pour ne pas dépasser de la grille)
             qte := 0;
-            val := app.grilleJeu[0][j];
-            
+            val := app.grilleJeu[i][j]; // valeur de référence
+
             if val <> CASE_VIDE then begin // on vérifie que la première case ne soit pas une case vide 
-                for k:=i to i + app.n do // on parcourt les n lignes au-dessus pour voir si les pions se succèdent
+                for k:=i to i + app.n - 1 do // on parcourt les n lignes au-dessus pour voir si les pions se succèdent
                     if app.grilleJeu[k][j] = val then // on compte le nombre de même symbole d'affilée
                         qte := qte+1
                     else 
@@ -46,7 +46,7 @@ begin
 
             // on peut sortir plus tôt de la boucle
             if qte = app.n then begin 
-                checkColonne := true;
+                checkColonne := true; // on passe la veleur à true car n pions sont alignés
                 break;
             end;
         end;
@@ -57,8 +57,36 @@ begin
 end;
 
 function checkLigne(): Boolean;
+var i, j, k, qte, val: ShortInt;
 begin
+    // on initialise la valeur de retour à false
     checkLigne := false;
+
+    // si on trouve une ligne avec n pions alignés, on passe la valeur à true
+    // on parcourt toutes les lignes
+    for i:=0 to app.hauteurGrille-1 do begin 
+        for j:=0 to app.largeurGrille - app.n do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
+            qte := 0;
+            val := app.grilleJeu[i][j]; // valeur de référence
+            
+            if val <> CASE_VIDE then begin // on vérifie que la première case ne soit pas une case vide 
+                for k:=j to j + app.n - 1 do // on parcourt les n colonnes à droite pour voir si les pions se succèdent
+                    if app.grilleJeu[i][k] = val then // on compte le nombre de même symbole d'affilée
+                        qte := qte+1
+                    else 
+                        break;
+            end;
+
+            // on peut sortir plus tôt de la boucle
+            if qte = app.n then begin 
+                checkLigne := true; // on passe la veleur à true car n pions sont alignés
+                break;
+            end;
+        end;
+
+        // on peut sortir plus tôt de la boucle
+        if checkLigne then break;     
+    end;
 end;
 
 function checkDiago(): Boolean;
