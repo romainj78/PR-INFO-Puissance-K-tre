@@ -55,9 +55,12 @@ end;
 procedure ecranVictoire();
 begin
     app.etape := ETAPE_FIN;
-
+    
     writeln();
-    writeln('Bravo Joueur ', app.joueur, ' ! Tu gagnes la partie !');
+    if app.victoire then
+        writeln('Bravo Joueur ', app.joueur, ' ! Tu gagnes la partie !')
+    else    
+        writeln('Match nul...');
 end;
 
 procedure afficherGrille();

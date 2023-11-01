@@ -11,6 +11,7 @@ function checkDiago(): Boolean;
 function choixColonne(): ShortInt;
 procedure changementJoueur();
 function colonnePleine(col: Integer): Boolean;
+function grillePleine(): Boolean;
 procedure placerPion(col: Integer);
 
 implementation
@@ -151,10 +152,28 @@ end;
 
 function colonnePleine(col: Integer): Boolean;
 begin
-    if app.grilleJeu[app.hauteurGrille-1][col] <> CASE_VIDE then
+    if app.grilleJeu[app.hauteurGrille-1][col-1] <> CASE_VIDE then
         colonnePleine := true 
     else
         colonnePleine := false;
+end;
+
+function grillePleine(): Boolean;
+var i, j: ShortInt;
+begin
+    // on initialise la valeur de retour à true
+    grillePleine := true;
+    // on parcourt toutes les lignes et colonnes jusqu'à trouver une case vide
+    for i:=0 to app.hauteurGrille-1 do begin
+        for j:=0 to app.largeurGrille-1 do begin
+            if app.grilleJeu[i][j] = CASE_VIDE then begin // s'il y a une case vide, la grille n'est pas plein
+                grillePleine := false;
+                break;
+            end;
+        end;
+        // on peut sortir de la boucle plus tôt
+        if not grillePleine then break;
+    end;
 end;
 
 procedure placerPion(col: Integer);
