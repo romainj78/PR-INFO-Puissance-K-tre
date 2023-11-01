@@ -22,6 +22,8 @@ begin
     app.victoire := false;
     app.joueur := JOUEUR_1;
 
+    Randomize(); // pour les modes de jeu surprise et solo
+
     if app.modeJeu = MODE_SURPRISE then
         placerPieges();
 
