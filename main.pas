@@ -25,10 +25,6 @@ var
 begin
   writeln('Hello World!');
 
-  choixMode();
-  choixN();
-  jouer();
-
   //initilization of video subsystem
   if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt;
 
@@ -70,5 +66,9 @@ begin
 
   //closing SDL2
   SDL_Quit;
+
+  choixMode();
+  choixN();
+  jouer();
 
 end.  
