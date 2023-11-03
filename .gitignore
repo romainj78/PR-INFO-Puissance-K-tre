@@ -8,3 +8,4 @@ out/
 usr/ 
 .DS_STORE
 .vscode/
+.exe
