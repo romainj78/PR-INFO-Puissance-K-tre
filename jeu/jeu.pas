@@ -4,6 +4,7 @@ interface
 
 uses 
     types,
+    sysutils,
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas',
@@ -64,8 +65,16 @@ begin
 end;
 
 procedure solo();
+var col: ShortInt;
 begin
-    
+    if app.joueur = JOUEUR_ORDI then begin 
+        col := choixOrdiAlea();
+        sleep(300);
+    end else 
+        col := choixColonne() - 1;
+    placerPion(col);
+    changementJoueur();
+    checkVictoire();
 end;
 
 end.
