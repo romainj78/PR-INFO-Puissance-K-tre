@@ -26,23 +26,25 @@ begin
   writeln('Hello World!');
 
   //initilization of video subsystem
-  if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt;
+  if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
 
-  if SDL_CreateWindowAndRenderer(500, 500, SDL_WINDOW_SHOWN, @sdlWindow1, @sdlRenderer) <> 0
-    then Halt;
+  // full set up
+  sdlWindow1 := SDL_CreateWindow('Window1', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
+  if sdlWindow1 = nil then Halt();
+
+  sdlRenderer := SDL_CreateRenderer(sdlWindow1, -1, 0);
+  if sdlRenderer = nil then Halt();
 
   // set scaling quality
   SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 'nearest');
 
   // create surface from file
   sdlSurface1 := SDL_LoadBMP('fpsdl.bmp');
-  if sdlSurface1 = nil then
-    Halt;
+  if sdlSurface1 = nil then Halt();
 
   // load image file
   sdlTexture1 := SDL_CreateTextureFromSurface(sdlRenderer, sdlSurface1);
-  if sdlTexture1 = nil then
-    Halt;
+  if sdlTexture1 = nil then Halt();
 
   // prepare rectangle
   sdlRectangle.x := 12;
@@ -65,7 +67,7 @@ begin
   SDL_DestroyWindow (sdlWindow1);
 
   //closing SDL2
-  SDL_Quit;
+  SDL_Quit();
 
   choixMode();
   choixN();
