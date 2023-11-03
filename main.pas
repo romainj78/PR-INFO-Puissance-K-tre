@@ -4,6 +4,8 @@ program main;
 
 uses 
   types,
+  sysutils,
+  Crt,
   choisirMode in 'jeu/choisirMode.pas',
   jeu in 'jeu/jeu.pas',
   afficher in 'affichage/afficher.pas',
