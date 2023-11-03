@@ -4,6 +4,8 @@ interface
 
 uses 
     types,
+    sysutils,
+    Crt,
     sdl2 in 'affichage/SDL/units/sdl2.pas';
 
 procedure affichage();
@@ -19,6 +21,7 @@ procedure affichage();
 var i, j: ShortInt;
 begin
     // AFFICHAGE CONSOLE
+    Clrscr();
 
     writeln();
     // bordure supérieure
