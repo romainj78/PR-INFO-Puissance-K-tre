@@ -29,7 +29,7 @@ begin
   if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
 
   // full set up
-  sdlWindow1 := SDL_CreateWindow('Window1', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
+  sdlWindow1 := SDL_CreateWindow('Puissance K-tre', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, SDL_WINDOW_SHOWN);
   if sdlWindow1 = nil then Halt();
 
   sdlRenderer := SDL_CreateRenderer(sdlWindow1, -1, 0);
