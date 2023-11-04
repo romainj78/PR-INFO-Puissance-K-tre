@@ -5,6 +5,7 @@ interface
 uses 
     types,
     sysutils,
+    {$ifdef unix}cthreads,{$endif}
     Crt,
     sdl2 in 'affichage/SDL2/units/sdl2.pas',
     sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
@@ -15,6 +16,7 @@ procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
 procedure initSDL();
 procedure detruireSDL();
+procedure boucleSDL();
 
 implementation
 
@@ -117,6 +119,9 @@ begin
     if app.affichage.surfaces.grille = nil then Halt();
     app.affichage.textures.grille := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.grille);
     if app.affichage.textures.grille = nil then Halt();
+
+    // On crée le thread pour la boucle infinie pour garder le focus de l'application 
+    app.thread := BeginThread(TThreadFunc(@boucleSDL));
 end;
 
 procedure detruireSDL();
@@ -131,6 +136,15 @@ begin
 
     //closing SDL2
     SDL_Quit();
+end;
+
+procedure boucleSDL();
+var sdlEvent: TSDL_Event;
+begin 
+    // exit loop if mouse button pressed
+    while SDL_PollEvent(@sdlEvent) = 1 do
+        if sdlEvent.type_ = SDL_QUITEV then
+            app.victoire := true;
 end;
 
 end.

@@ -19,8 +19,6 @@ procedure solo();
 implementation
 
 procedure jouer();
-var exitLoop: Boolean;
-var sdlEvent: TSDL_Event;
 begin
     app.etape := ETAPE_JEU;
     app.victoire := false;
@@ -34,7 +32,7 @@ begin
 
     exitLoop := false;
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
-    while (not app.victoire) and (not grillePleine()) and (not exitLoop) do begin
+    while (not app.victoire) and (not grillePleine()) do begin
         affichage(); // affichage de la grille
 
         case app.modeJeu of 
@@ -42,11 +40,6 @@ begin
             MODE_SURPRISE: surprise();
             MODE_SOLO: solo();
         end;
-
-        // exit loop if mouse button pressed
-        while SDL_PollEvent(@sdlEvent) = 1 do
-            if sdlEvent.type_ = SDL_QUITEV then
-                exitLoop := true;
     end;
 
     affichage();

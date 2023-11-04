@@ -5,6 +5,7 @@ program main;
 uses 
     types,
     sysutils,
+    {$ifdef unix}cthreads,{$endif}
     Crt,
     choisirMode in 'jeu/choisirMode.pas',
     jeu in 'jeu/jeu.pas',

@@ -2,7 +2,10 @@ unit types;
 
 interface
 
-uses sdl2 in 'affichage/SDL2/units/sdl2.pas';
+uses 
+    sysutils,
+    {$ifdef unix}cthreads,{$endif}
+    sdl2 in 'affichage/SDL2/units/sdl2.pas';
 
 const MAX_ITER = 50;
 
@@ -51,6 +54,7 @@ type Jeu = record
         renderer: PSDL_Renderer;
         window: PSDL_Window;
         contextWindow: PSDL_Window;
+        thread: TThreadID;
     end;
 end;
 
