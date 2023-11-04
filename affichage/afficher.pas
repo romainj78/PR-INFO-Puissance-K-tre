@@ -56,6 +56,7 @@ begin
     {
     TO DO
     }
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.fond, nil, nil);
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
     SDL_RenderPresent(app.affichage.renderer);
 
