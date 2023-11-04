@@ -8,7 +8,8 @@ procedure checkVictoire();
 function checkColonne(): Boolean;
 function checkLigne(): Boolean;
 function checkDiago(): Boolean;
-function choixColonne(): ShortInt;
+// function choixColonne(): ShortInt;
+function choixColonne(x, y: Integer): ShortInt;
 procedure changementJoueur();
 function colonnePleine(col: Integer): Boolean;
 function grillePleine(): Boolean;
@@ -128,15 +129,28 @@ begin
     end;
 end;
 
-function choixColonne(): ShortInt;
-var col: ShortInt;
+// function choixColonne(): ShortInt;
+function choixColonne(x, y: Integer): ShortInt;
+// var col: ShortInt;
 begin
-    repeat
+    // CONSOLE
+
+    {repeat
         write('Joueur ', app.joueur, ', c''est à ton tour ! Quelle colonne choisis-tu ? ');
         readln(col);
     until (col > 0) and (col <= app.largeurGrille) and (not colonnePleine(col)); // il faut que la colonne existe et ne soit pas déjà pleine
 
-    choixColonne := col;
+    choixColonne := col;}
+
+    // SDL
+
+    //app.affichage.posPion.x := round(150 + ((900 div app.largeurGrille) * (j+0.5)) - app.affichage.posPion.w / 2);
+    //app.affichage.posPion.y := round(800 - 150 - ((550 div app.hauteurGrille) * (i+0.5)) - app.affichage.posPion.h / 2);
+
+    choixColonne := (x - 150) div (900 div app.largeurGrille);
+
+    if colonnePleine(choixColonne) then 
+        choixColonne := -1;
 end;
 
 procedure changementJoueur();
@@ -152,7 +166,8 @@ end;
 
 function colonnePleine(col: Integer): Boolean;
 begin
-    if app.grilleJeu[app.hauteurGrille-1][col-1] <> CASE_VIDE then
+    //if app.grilleJeu[app.hauteurGrille-1][col-1] <> CASE_VIDE then
+    if app.grilleJeu[app.hauteurGrille-1][col] <> CASE_VIDE then
         colonnePleine := true 
     else
         colonnePleine := false;

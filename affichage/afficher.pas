@@ -151,7 +151,7 @@ begin
     app.affichage.posPion.h := (550 div app.hauteurGrille) - 20;
 
     // On crée le thread pour la boucle infinie pour garder le focus de l'application 
-    app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
+    //app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
 end;
 
 procedure detruireSDL();
@@ -168,7 +168,7 @@ begin
     SDL_Quit();
 
     // on ferme le thread
-    EndThread(app.affichage.thread);
+    //EndThread(app.affichage.thread);
 end;
 
 procedure boucleSDL();

@@ -19,6 +19,9 @@ procedure solo();
 implementation
 
 procedure jouer();
+var loop: Boolean = true;
+var event: TSDL_Event;
+var x, y: Integer;
 begin
     app.etape := ETAPE_JEU;
     app.victoire := false;
@@ -31,19 +34,61 @@ begin
         placerPieges();
 
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
-    while (not app.victoire) and (not grillePleine()) do begin
+    while loop and (not app.victoire) and (not grillePleine()) do begin
         affichage(); // affichage de la grille
 
-        case app.modeJeu of 
+        while SDL_PollEvent(@sdlEvent) = 1 then begin
+            case sdlEvent.type_ of
+                SDL_MOUSEBUTTONUP: begin 
+                    x := sdlEvent.button.x;
+                    y := sdlEvent.button.y;
+
+                    // On regarde si le clic est dans la grille : 
+                    if (x >= 150) and (x <= 1200-150) and (y >= 100) and (y <= 800-150) then begin 
+                        col := choixColonne(x, y);
+
+                        // Si on a cliqué sur un colonne qui n'est pas pleine
+                        if col <> -1 then begin 
+                            placerPion(col);
+
+                            if app.modeJeu = MODE_SURPRISE then
+                                actionPieges();
+
+                            changementJoueur();
+                            checkVictoire();
+
+                            if (app.modeJeu = MODE_SOLO) and (app.joueur = JOUEUR_ORDI) then begin 
+                                affichage();
+                                sleep(300);
+                                col := choixOrdiAlea();
+                                placerPion(col);
+                                changementJoueur();
+                                checkVictoire();
+                            end;
+                        end;
+                    end;
+
+                end;
+                SDL_QUITEV:  begin 
+                    //app.victoire := true;
+                    loop := false;
+                end;
+            end;
+
+            SDL_Delay(50);
+        end;
+
+        {case app.modeJeu of 
             MODE_UNCONTREUN: unContreUn();
             MODE_SURPRISE: surprise();
             MODE_SOLO: solo();
-        end;
+        end;}
     end;
 
     affichage();
     changementJoueur();
-    ecranVictoire();
+    if loop then
+        ecranVictoire();
 end;
 
 procedure unContreUn();
