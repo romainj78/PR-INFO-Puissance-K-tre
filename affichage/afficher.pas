@@ -24,7 +24,7 @@ implementation
 
 procedure affichage();
 var i, j: ShortInt;
-var sdlRectangle1, sdlRectangle2: TSDL_Rect;
+var sdlRectangle: TSDL_Rect;
 begin
     // AFFICHAGE CONSOLE
     Clrscr();
@@ -63,16 +63,16 @@ begin
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
 
     // Test affichage 2 fois le même pion avec 2 rect 
-    sdlRectangle1.x := 50;
-    sdlRectangle1.y := 50;
-    sdlRectangle1.w := 71;
-    sdlRectangle1.h := 71;
-    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle1);
-    sdlRectangle2.x := 500;
-    sdlRectangle2.y := 500;
-    sdlRectangle2.w := 71;
-    sdlRectangle2.h := 71;
-    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle2);
+    sdlRectangle.x := 50;
+    sdlRectangle.y := 50;
+    sdlRectangle.w := 71;
+    sdlRectangle.h := 71;
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);
+    sdlRectangle.x := 500;
+    sdlRectangle.y := 500;
+    sdlRectangle.w := 71;
+    sdlRectangle.h := 71;
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);
 
     SDL_RenderPresent(app.affichage.renderer);
 
