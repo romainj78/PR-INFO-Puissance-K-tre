@@ -24,7 +24,6 @@ implementation
 
 procedure affichage();
 var i, j: ShortInt;
-var sdlRectangle: TSDL_Rect;
 begin
     // AFFICHAGE CONSOLE
     Clrscr();
@@ -63,13 +62,14 @@ begin
     for i:=app.hauteurGrille-1 downto 0 do begin
         for j:=0 to app.largeurGrille-1 do begin
             if app.grilleJeu[i][j] <> CASE_VIDE then begin
-                app.affichage.posPion.x := 100 + (((550 div app.hauteurGrille) * (i+0.5)) div 1) - app.affichage.posPion.h;
-                app.affichage.posPion.y := 150 + (((900 div app.largeurGrille) * (j+0.5)) div 1) - app.affichage.posPion.w;
+                app.affichage.posPion.x := round(150 + ((900 div app.largeurGrille) * (j+0.5)) - app.affichage.posPion.w / 2);
+                app.affichage.posPion.y := round(800 - 150 - ((550 div app.hauteurGrille) * (i+0.5)) - app.affichage.posPion.h / 2);
+                writeln('i: ', i, ' ; j: ', j, ' ; x: ', app.affichage.posPion.x, ' ; y: ', app.affichage.posPion.y);
 
                 if app.grilleJeu[i][j] = PION_J1 then 
                     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @app.affichage.posPion)
                 else
-                    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionJaune, nil, @app.affichage.posPion)
+                    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionJaune, nil, @app.affichage.posPion);
             end;
         end;
     end;
@@ -115,6 +115,7 @@ begin
 
     // On crée la fenêtre et le Renderer
     app.affichage.window := SDL_CreateWindow('Puissance K-tre', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, SDL_WINDOW_SHOWN);
+    //app.affichage.window := SDL_CreateWindow('Puissance K-tre', 50, 50, 1200, 800, SDL_WINDOW_SHOWN);
     if app.affichage.window = nil then Halt();
 
     app.affichage.renderer := SDL_CreateRenderer(app.affichage.window, -1, 0);
@@ -176,13 +177,13 @@ var sdlEvent: TSDL_Event;
 begin 
     exitLoop := false;
     while not exitLoop do begin
-        {if SDL_PollEvent(@sdlEvent) = 1 then
+        if SDL_PollEvent(@sdlEvent) = 1 then
             if sdlEvent.type_ = SDL_QUITEV then begin 
                 app.victoire := true;
                 exitLoop := true;
-            end;}
+            end;
         
-        SDL_RenderPresent(app.affichage.renderer);
+        // SDL_RenderPresent(app.affichage.renderer);
         // affichage();
         SDL_Delay(2000);
         writeln('a');
