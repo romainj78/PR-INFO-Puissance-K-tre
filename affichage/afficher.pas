@@ -99,6 +99,12 @@ begin
     // set scaling quality
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 'nearest');
 
+    // Chargement du fond
+    app.affichage.surfaces.fond := IMG_LOAD('affichage/assets/Fond-Blanc-Puissance-K-tre.png');
+    if app.affichage.surfaces.fond = nil then Halt();
+    app.affichage.textures.fond := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.fond);
+    if app.affichage.textures.fond = nil then Halt();
+
     // Chargement de la grille
     app.affichage.surfaces.grille := IMG_LOAD('affichage/assets/Grille-Puissance-K-tre-N4.png');
     if app.affichage.surfaces.grille = nil then Halt();
@@ -109,10 +115,12 @@ end;
 procedure detruireSDL();
 begin
     // clear memory
+    SDL_DestroyTexture(app.affichage.textures.fond);
+    SDL_FreeSurface(app.affichage.surfaces.fond);
     SDL_DestroyTexture(app.affichage.textures.grille);
     SDL_FreeSurface(app.affichage.surfaces.grille);
     SDL_DestroyRenderer(app.affichage.renderer);
-    SDL_DestroyWindow (app.affichage.window);
+    SDL_DestroyWindow(app.affichage.window);
 
     //closing SDL2
     SDL_Quit();
