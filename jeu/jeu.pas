@@ -5,6 +5,7 @@ interface
 uses 
     types,
     sysutils,
+    sdl2 in 'affichage/SDL2/units/sdl2.pas',
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas',
@@ -18,6 +19,8 @@ procedure solo();
 implementation
 
 procedure jouer();
+var exitLoop: Boolean;
+var sdlEvent: TSDL_Event;
 begin
     app.etape := ETAPE_JEU;
     app.victoire := false;
@@ -29,8 +32,9 @@ begin
     if app.modeJeu = MODE_SURPRISE then
         placerPieges();
 
+    exitLoop := false;
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
-    while (not app.victoire) and (not grillePleine()) do begin
+    while (not app.victoire) and (not grillePleine()) and (not exitLoop) do begin
         affichage(); // affichage de la grille
 
         case app.modeJeu of 
@@ -38,6 +42,11 @@ begin
             MODE_SURPRISE: surprise();
             MODE_SOLO: solo();
         end;
+
+        // exit loop if mouse button pressed
+        while SDL_PollEvent(@sdlEvent) = 1 do
+            if sdlEvent.type_ = SQL_QUIT then
+                exitLoop := true;
     end;
 
     affichage();
