@@ -24,6 +24,7 @@ implementation
 
 procedure affichage();
 var i, j: ShortInt;
+var sdlRectangle1, sdlRectangle2: TSDL_Rect;
 begin
     // AFFICHAGE CONSOLE
     Clrscr();
