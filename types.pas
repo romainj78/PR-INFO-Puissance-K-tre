@@ -42,7 +42,7 @@ type Jeu = record
         textures: Array[1..MAX_ITER] of PSDL_Texture;
         surfaces: Array[1..MAX_ITER] of PSDL_Surface;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
-        renderers: Array[1..MAX_ITER] of PSDL_Renderer;
+        renderer: PSDL_Renderer;
         window: PSDL_Window;
         contextWindow: PSDL_Window;
     end;

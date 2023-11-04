@@ -12,6 +12,8 @@ procedure affichage();
 procedure ecranVictoire();
 procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
+procedure initSDL();
+procedure detruireSDL();
 
 implementation
 
@@ -53,6 +55,10 @@ begin
     {
     TO DO
     }
+
+
+    // render to window for 2 seconds
+    //SDL_RenderPresent(app.affichage.renderer);
 end;
 
 procedure ecranVictoire();
@@ -74,6 +80,34 @@ end;
 procedure afficherPions(grilleJeu: Grille);
 begin
     
+end;
+
+procedure initSDL();
+begin
+    //initilization of video subsystem
+    if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
+
+    // full set up
+    app.affichage.window := SDL_CreateWindow('Puissance K-tre', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, SDL_WINDOW_SHOWN);
+    if app.affichage.window = nil then Halt();
+
+    app.affichage.renderer := SDL_CreateRenderer(app.affichage.window, -1, 0);
+    if app.affichage.renderer = nil then Halt();
+
+    // set scaling quality
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 'nearest');
+end;
+
+procedure detruireSDL();
+begin
+    // clear memory
+    //SDL_DestroyTexture(sdlTexture1);
+    //SDL_FreeSurface(sdlSurface1);
+    SDL_DestroyRenderer(app.affichage.renderer);
+    SDL_DestroyWindow (app.affichage.window);
+
+    //closing SDL2
+    SDL_Quit();
 end;
 
 end.
