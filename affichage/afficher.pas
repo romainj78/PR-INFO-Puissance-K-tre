@@ -121,7 +121,7 @@ begin
     if app.affichage.textures.grille = nil then Halt();
 
     // On crée le thread pour la boucle infinie pour garder le focus de l'application 
-    app.thread := BeginThread(TThreadFunc(@boucleSDL));
+    app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
 end;
 
 procedure detruireSDL();
@@ -136,15 +136,29 @@ begin
 
     //closing SDL2
     SDL_Quit();
+
+    // on ferme le thread
+    EndThread(app.affichage.thread);
 end;
 
 procedure boucleSDL();
+var exitLoop: Boolean;
 var sdlEvent: TSDL_Event;
 begin 
-    // exit loop if mouse button pressed
-    while SDL_PollEvent(@sdlEvent) = 1 do
-        if sdlEvent.type_ = SDL_QUITEV then
-            app.victoire := true;
+    exitLoop := false;
+    while not exitLoop do begin
+        {if SDL_PollEvent(@sdlEvent) = 1 then
+            if sdlEvent.type_ = SDL_QUITEV then begin 
+                app.victoire := true;
+                exitLoop := true;
+            end;}
+        
+        SDL_RenderPresent(app.affichage.renderer);
+        // affichage();
+        SDL_Delay(2000);
+        writeln('a');
+    end;
+    
 end;
 
 end.

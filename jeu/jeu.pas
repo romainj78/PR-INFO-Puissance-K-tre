@@ -30,7 +30,6 @@ begin
     if app.modeJeu = MODE_SURPRISE then
         placerPieges();
 
-    exitLoop := false;
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
     while (not app.victoire) and (not grillePleine()) do begin
         affichage(); // affichage de la grille
