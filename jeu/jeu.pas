@@ -45,7 +45,7 @@ begin
 
         // exit loop if mouse button pressed
         while SDL_PollEvent(@sdlEvent) = 1 do
-            if sdlEvent.type_ = SQL_QUIT then
+            if sdlEvent.type_ = SDL_QUITEV then
                 exitLoop := true;
     end;
 
