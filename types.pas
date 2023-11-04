@@ -59,6 +59,7 @@ type Jeu = record
         window: PSDL_Window;
         contextWindow: PSDL_Window;
         thread: TThreadID;
+        posPion: TSDL_Rect;
     end;
 end;
 

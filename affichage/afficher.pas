@@ -56,11 +56,23 @@ begin
 
     // AFICHAGE SDL2
 
-    {
-    TO DO
-    }
+    // On affiche le fond et la grille
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.fond, nil, nil);
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
+
+    for i:=app.hauteurGrille-1 downto 0 do begin
+        for j:=0 to app.largeurGrille-1 do begin
+            if app.grilleJeu[i][j] <> CASE_VIDE then begin
+                app.affichage.posPion.x := 100 + (((550 div app.hauteurGrille) * (i+0.5)) div 1) - app.affichage.posPion.h;
+                app.affichage.posPion.y := 150 + (((900 div app.largeurGrille) * (j+0.5)) div 1) - app.affichage.posPion.w;
+
+                if app.grilleJeu[i][j] = PION_J1 then 
+                    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @app.affichage.posPion)
+                else
+                    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionJaune, nil, @app.affichage.posPion)
+            end;
+        end;
+    end;
 
     // SAVE : affichage d'un pion 
     {sdlRectangle.x := 50;
@@ -98,17 +110,17 @@ end;
 
 procedure initSDL();
 begin
-    //initilization of video subsystem
+    // On initialise le sous-système vidéo
     if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
 
-    // full set up
+    // On crée la fenêtre et le Renderer
     app.affichage.window := SDL_CreateWindow('Puissance K-tre', SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 800, SDL_WINDOW_SHOWN);
     if app.affichage.window = nil then Halt();
 
     app.affichage.renderer := SDL_CreateRenderer(app.affichage.window, -1, 0);
     if app.affichage.renderer = nil then Halt();
 
-    // set scaling quality
+    // On définit la qualité de l'échelle
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 'nearest');
 
     // Chargement du fond
@@ -132,6 +144,10 @@ begin
     if app.affichage.surfaces.pionRouge = nil then Halt();
     app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
     if app.affichage.textures.pionRouge = nil then Halt();
+
+    // On initialise la taille du rectangle position
+    app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;
+    app.affichage.posPion.h := (550 div app.hauteurGrille) - 20;
 
     // On crée le thread pour la boucle infinie pour garder le focus de l'application 
     app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
