@@ -62,18 +62,13 @@ begin
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.fond, nil, nil);
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
 
-    // Test affichage 2 fois le même pion avec 2 rect 
-    sdlRectangle.x := 50;
+    // SAVE : affichage d'un pion 
+    {sdlRectangle.x := 50;
     sdlRectangle.y := 50;
     sdlRectangle.w := 71;
     sdlRectangle.h := 71;
-    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);
-    sdlRectangle.x := 500;
-    sdlRectangle.y := 500;
-    sdlRectangle.w := 71;
-    sdlRectangle.h := 71;
-    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);
-
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);}
+    
     SDL_RenderPresent(app.affichage.renderer);
 
     // render to window for 2 seconds
