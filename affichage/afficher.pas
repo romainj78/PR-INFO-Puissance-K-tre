@@ -120,6 +120,16 @@ begin
     app.affichage.textures.grille := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.grille);
     if app.affichage.textures.grille = nil then Halt();
 
+    // Chargement des pions
+    app.affichage.surfaces.pionJaune := IMG_LOAD('affichage/assets/Pion-Jaune-Puissance-K-tre-N4.png');
+    if app.affichage.surfaces.pionJaune = nil then Halt();
+    app.affichage.textures.pionJaune := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionJaune);
+    if app.affichage.textures.pionJaune = nil then Halt();
+    app.affichage.surfaces.pionRouge := IMG_LOAD('affichage/assets/Pion-Rouge-Puissance-K-tre-N4.png');
+    if app.affichage.surfaces.pionRouge = nil then Halt();
+    app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
+    if app.affichage.textures.pionRouge = nil then Halt();
+
     // On crée le thread pour la boucle infinie pour garder le focus de l'application 
     app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
 end;

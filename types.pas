@@ -45,10 +45,14 @@ type Jeu = record
         surfaces: record
             fond: PSDL_Surface;
             grille: PSDL_Surface;
+            pionJaune: PSDL_Surface;
+            pionRouge: PSDL_Surface;
         end;
         textures: record 
             fond: PSDL_Texture;
             grille: PSDL_Texture;
+            pionJaune: PSDL_Texture;
+            pionRouge: PSDL_Texture;
         end;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
         renderer: PSDL_Renderer;
