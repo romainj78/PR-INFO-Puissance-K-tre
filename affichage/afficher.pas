@@ -22,6 +22,7 @@ implementation
 
 procedure affichage();
 var i, j: ShortInt;
+var sdlEvent: TSDL_Event;
 begin
     // AFFICHAGE CONSOLE
     Clrscr();
@@ -59,6 +60,11 @@ begin
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.fond, nil, nil);
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
     SDL_RenderPresent(app.affichage.renderer);
+
+    // exit loop if mouse button pressed
+    while SDL_PollEvent(@sdlEvent) = 1 do
+      if sdlEvent.type_ = SDL_MOUSEBUTTONDOWN then
+        writeln('anngke');
 
     // render to window for 2 seconds
     //SDL_RenderPresent(app.affichage.renderer);
