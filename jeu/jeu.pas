@@ -12,9 +12,9 @@ uses
     afficher in 'affichage/afficher.pas';
 
 procedure jouer();
-procedure unContreUn();
+{procedure unContreUn();
 procedure surprise();
-procedure solo();
+procedure solo();}
 
 implementation
 
@@ -22,6 +22,7 @@ procedure jouer();
 var loop: Boolean = true;
 var event: TSDL_Event;
 var x, y: Integer;
+var col: ShortInt;
 begin
     app.etape := ETAPE_JEU;
     app.victoire := false;
@@ -37,11 +38,11 @@ begin
     while loop and (not app.victoire) and (not grillePleine()) do begin
         affichage(); // affichage de la grille
 
-        while SDL_PollEvent(@sdlEvent) = 1 then begin
-            case sdlEvent.type_ of
+        while SDL_PollEvent(@event) = 1 do begin
+            case event.type_ of
                 SDL_MOUSEBUTTONUP: begin 
-                    x := sdlEvent.button.x;
-                    y := sdlEvent.button.y;
+                    x := event.button.x;
+                    y := event.button.y;
 
                     // On regarde si le clic est dans la grille : 
                     if (x >= 150) and (x <= 1200-150) and (y >= 100) and (y <= 800-150) then begin 
@@ -52,7 +53,7 @@ begin
                             placerPion(col);
 
                             if app.modeJeu = MODE_SURPRISE then
-                                actionPieges();
+                                actionPieges(col);
 
                             changementJoueur();
                             checkVictoire();
@@ -91,7 +92,7 @@ begin
         ecranVictoire();
 end;
 
-procedure unContreUn();
+{procedure unContreUn();
 var col: ShortInt;
 begin
     col := choixColonne() - 1;
@@ -121,6 +122,6 @@ begin
     placerPion(col);
     changementJoueur();
     checkVictoire();
-end;
+end;}
 
 end.
