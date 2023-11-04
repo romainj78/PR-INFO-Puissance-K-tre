@@ -24,7 +24,6 @@ implementation
 
 procedure affichage();
 var i, j: ShortInt;
-var sdlEvent: TSDL_Event;
 begin
     // AFFICHAGE CONSOLE
     Clrscr();
@@ -61,12 +60,20 @@ begin
     }
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.fond, nil, nil);
     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
-    SDL_RenderPresent(app.affichage.renderer);
 
-    // exit loop if mouse button pressed
-    while SDL_PollEvent(@sdlEvent) = 1 do
-      if sdlEvent.type_ = SDL_MOUSEBUTTONDOWN then
-        writeln('anngke');
+    // Test affichage 2 fois le même pion avec 2 rect 
+    sdlRectangle1.x := 50;
+    sdlRectangle1.y := 50;
+    sdlRectangle1.w := 71;
+    sdlRectangle1.h := 71;
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle1);
+    sdlRectangle2.x := 500;
+    sdlRectangle2.y := 500;
+    sdlRectangle2.w := 71;
+    sdlRectangle2.h := 71;
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle2);
+
+    SDL_RenderPresent(app.affichage.renderer);
 
     // render to window for 2 seconds
     //SDL_RenderPresent(app.affichage.renderer);
