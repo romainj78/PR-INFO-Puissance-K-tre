@@ -40,9 +40,11 @@ type Jeu = record
     victoire: Boolean;
     affichage: record
         surfaces: record
+            fond: PSDL_Surface;
             grille: PSDL_Surface;
         end;
         textures: record 
+            fond: PSDL_Texture;
             grille: PSDL_Texture;
         end;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
