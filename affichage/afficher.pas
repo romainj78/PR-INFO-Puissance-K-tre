@@ -5,7 +5,6 @@ interface
 uses 
     types,
     sysutils,
-    {$ifdef unix}cthreads,{$endif}
     Crt,
     sdl2 in 'affichage/SDL2/units/sdl2.pas',
     sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
@@ -16,7 +15,6 @@ procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
 procedure initSDL();
 procedure detruireSDL();
-procedure boucleSDL();
 
 implementation
 
@@ -64,8 +62,7 @@ begin
             if app.grilleJeu[i][j] <> CASE_VIDE then begin
                 app.affichage.posPion.x := round(150 + ((900 div app.largeurGrille) * (j+0.5)) - app.affichage.posPion.w / 2);
                 app.affichage.posPion.y := round(800 - 150 - ((550 div app.hauteurGrille) * (i+0.5)) - app.affichage.posPion.h / 2);
-                writeln('i: ', i, ' ; j: ', j, ' ; x: ', app.affichage.posPion.x, ' ; y: ', app.affichage.posPion.y);
-
+                
                 if app.grilleJeu[i][j] = PION_J1 then 
                     SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @app.affichage.posPion)
                 else
@@ -74,17 +71,7 @@ begin
         end;
     end;
 
-    // SAVE : affichage d'un pion 
-    {sdlRectangle.x := 50;
-    sdlRectangle.y := 50;
-    sdlRectangle.w := 71;
-    sdlRectangle.h := 71;
-    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.pionRouge, nil, @sdlRectangle);}
-    
     SDL_RenderPresent(app.affichage.renderer);
-
-    // render to window for 2 seconds
-    //SDL_RenderPresent(app.affichage.renderer);
 end;
 
 procedure ecranVictoire();
@@ -149,9 +136,6 @@ begin
     // On initialise la taille du rectangle position
     app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;
     app.affichage.posPion.h := (550 div app.hauteurGrille) - 20;
-
-    // On crée le thread pour la boucle infinie pour garder le focus de l'application 
-    //app.affichage.thread := BeginThread(TThreadFunc(@boucleSDL));
 end;
 
 procedure detruireSDL();
@@ -166,29 +150,6 @@ begin
 
     //closing SDL2
     SDL_Quit();
-
-    // on ferme le thread
-    //EndThread(app.affichage.thread);
-end;
-
-procedure boucleSDL();
-var exitLoop: Boolean;
-var sdlEvent: TSDL_Event;
-begin 
-    exitLoop := false;
-    while not exitLoop do begin
-        if SDL_PollEvent(@sdlEvent) = 1 then
-            if sdlEvent.type_ = SDL_QUITEV then begin 
-                app.victoire := true;
-                exitLoop := true;
-            end;
-        
-        // SDL_RenderPresent(app.affichage.renderer);
-        // affichage();
-        SDL_Delay(2000);
-        writeln('a');
-    end;
-    
 end;
 
 end.

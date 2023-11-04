@@ -34,10 +34,10 @@ begin
     if app.modeJeu = MODE_SURPRISE then
         placerPieges();
 
+    affichage();
+
     // à chaque tour, on fait jouer le joueur, en fonction du mode de jeu choisi
     while loop and (not app.victoire) and (not grillePleine()) do begin
-        affichage(); // affichage de la grille
-
         while SDL_PollEvent(@event) = 1 do begin
             case event.type_ of
                 SDL_MOUSEBUTTONUP: begin 
@@ -69,6 +69,7 @@ begin
                         end;
                     end;
 
+                    affichage(); // affichage de la grille
                 end;
                 SDL_QUITEV:  begin 
                     //app.victoire := true;
@@ -88,8 +89,10 @@ begin
 
     affichage();
     changementJoueur();
-    if loop then
+    if loop then begin 
+        sleep(1000);
         ecranVictoire();
+    end;
 end;
 
 {procedure unContreUn();
