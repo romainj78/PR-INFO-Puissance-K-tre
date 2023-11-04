@@ -11,6 +11,7 @@ uses
     afficher in 'affichage/afficher.pas',
     //SDL2,
     sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    sdl2_image in 'affichage/SDL2/units/sdl2_image.pas',
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas';
@@ -18,9 +19,9 @@ uses
 begin
     writeln('Hello World!');    
 
-    initSDL();
     choixMode();
     choixN();
+    initSDL();
     jouer();
     detruireSDL();
 

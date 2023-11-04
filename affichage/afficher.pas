@@ -6,7 +6,8 @@ uses
     types,
     sysutils,
     Crt,
-    sdl2 in 'affichage/SDL/units/sdl2.pas';
+    sdl2 in 'affichage/SDL2/units/sdl2.pas'
+    sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
 
 procedure affichage();
 procedure ecranVictoire();
@@ -55,7 +56,8 @@ begin
     {
     TO DO
     }
-
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.grille, nil, nil);
+    SDL_RenderPresent(app.affichage.renderer);
 
     // render to window for 2 seconds
     //SDL_RenderPresent(app.affichage.renderer);
@@ -96,13 +98,19 @@ begin
 
     // set scaling quality
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 'nearest');
+
+    // Chargement de la grille
+    app.affichage.surfaces.grille := IMG_LOAD('affichage/assets/Grille-Puissance-K-tre-N4.png');
+    if app.affichage.surfaces.grille = nil then Halt();
+    app.affichage.textures.grille := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.grille);
+    if app.affichage.textures.grille = nil then Halt();
 end;
 
 procedure detruireSDL();
 begin
     // clear memory
-    //SDL_DestroyTexture(sdlTexture1);
-    //SDL_FreeSurface(sdlSurface1);
+    SDL_DestroyTexture(app.affichage.textures.grille);
+    SDL_FreeSurface(app.affichage.surfaces.grille);
     SDL_DestroyRenderer(app.affichage.renderer);
     SDL_DestroyWindow (app.affichage.window);
 

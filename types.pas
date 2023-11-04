@@ -39,8 +39,12 @@ type Jeu = record
     hauteurGrille: ShortInt;
     victoire: Boolean;
     affichage: record
-        textures: Array[1..MAX_ITER] of PSDL_Texture;
-        surfaces: Array[1..MAX_ITER] of PSDL_Surface;
+        surfaces: record
+            grille: PSDL_Surface;
+        end;
+        textures: record 
+            grille: PSDL_Texture;
+        end;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
         renderer: PSDL_Renderer;
         window: PSDL_Window;
