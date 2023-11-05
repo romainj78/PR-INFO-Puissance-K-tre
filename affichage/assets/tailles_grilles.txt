@@ -4,7 +4,7 @@ Case : centrée avec une marge de 10 en haut et 10 en bas
 
 n=3: 5 x 4 --> 5x180 ; 4x137+2
 n=4: 7 x 6 --> 6x91+4 ; 7x128+4
-n=5: 9 x 7
+n=5: 9 x 7 --> 9x100 ; 7x78+4
 n=6: 11 x 9
 n=7: 13 x 10
 n=8: 15 x 12
