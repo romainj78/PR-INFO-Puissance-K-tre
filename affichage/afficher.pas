@@ -140,15 +140,19 @@ end;
 
 procedure detruireSDL();
 begin
-    // clear memory
+    // On libère la mémoire
     SDL_DestroyTexture(app.affichage.textures.fond);
     SDL_FreeSurface(app.affichage.surfaces.fond);
     SDL_DestroyTexture(app.affichage.textures.grille);
     SDL_FreeSurface(app.affichage.surfaces.grille);
+    SDL_DestroyTexture(app.affichage.textures.pionJaune);
+    SDL_FreeSurface(app.affichage.surfaces.pionJaune);
+    SDL_DestroyTexture(app.affichage.textures.pionRouge);
+    SDL_FreeSurface(app.affichage.surfaces.pionRouge);
     SDL_DestroyRenderer(app.affichage.renderer);
     SDL_DestroyWindow(app.affichage.window);
 
-    //closing SDL2
+    // On ferme la SDL2
     SDL_Quit();
 end;
 
