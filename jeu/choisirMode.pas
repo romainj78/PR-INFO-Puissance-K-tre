@@ -37,7 +37,7 @@ begin
     repeat
         write('Choix de la puissance N (entre 3 et 10) : ');
         readln(choix);
-    until (choix >= 3) and (choix <= 10);
+    until (choix >= 3) and (choix <= 7);
 
     app.n := choix;
 
