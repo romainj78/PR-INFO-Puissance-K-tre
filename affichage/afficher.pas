@@ -96,6 +96,7 @@ begin
 end;
 
 procedure initSDL();
+var nomFichier: PChar;
 begin
     // On initialise le sous-système vidéo
     if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
@@ -118,17 +119,20 @@ begin
     if app.affichage.textures.fond = nil then Halt();
 
     // Chargement de la grille
-    app.affichage.surfaces.grille := IMG_LOAD('affichage/assets/Grille-Puissance-K-tre-N4.png');
+    strpcopy(nomFichier, 'affichage/assets/Grille-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
+    app.affichage.surfaces.grille := IMG_LOAD(nomFichier);
     if app.affichage.surfaces.grille = nil then Halt();
     app.affichage.textures.grille := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.grille);
     if app.affichage.textures.grille = nil then Halt();
 
     // Chargement des pions
-    app.affichage.surfaces.pionJaune := IMG_LOAD('affichage/assets/Pion-Jaune-Puissance-K-tre-N4.png');
+    strpcopy(nomFichier, 'affichage/assets/Pion-Jaune-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
+    app.affichage.surfaces.pionJaune := IMG_LOAD(nomFichier);
     if app.affichage.surfaces.pionJaune = nil then Halt();
     app.affichage.textures.pionJaune := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionJaune);
     if app.affichage.textures.pionJaune = nil then Halt();
-    app.affichage.surfaces.pionRouge := IMG_LOAD('affichage/assets/Pion-Rouge-Puissance-K-tre-N4.png');
+    strpcopy(nomFichier, 'affichage/assets/Pion-Rouge-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
+    app.affichage.surfaces.pionRouge := IMG_LOAD(nomFichier);
     if app.affichage.surfaces.pionRouge = nil then Halt();
     app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
     if app.affichage.textures.pionRouge = nil then Halt();
