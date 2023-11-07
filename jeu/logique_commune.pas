@@ -118,7 +118,7 @@ begin
         end;
 
         if not checkDiago then begin 
-            for j := app.n - 1 to app.largeurGrille - app.n do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
+            for j := app.n - 1 to app.largeurGrille - 1 do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
                 qteG := 0;
                 val := app.grilleJeu[i][j]; // valeur de référence
                 
