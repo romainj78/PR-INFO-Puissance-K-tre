@@ -96,9 +96,8 @@ begin
 
     // si on trouve une daigonale avec n pions alignés, on passe la valeur à true
     for i := 0 to app.hauteurGrille - app.n do begin 
-        for j := app.n - 1 to app.largeurGrille - app.n do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
+        for j := 0 to app.largeurGrille - app.n do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
             qteD := 0;
-            qteG := 0;
             val := app.grilleJeu[i][j]; // valeur de référence
             
             if val <> CASE_VIDE then begin // on vérifie que la première case ne soit pas une case vide 
@@ -108,18 +107,34 @@ begin
                         qteD := qteD+1
                     else 
                         break;
-                // on vérifie la colonne montante gauche
-                for k:=0 to app.n - 1 do // on parcourt les n colonnes à gauche pour voir si les pions se succèdent en diagonale montanten gauche
-                    if app.grilleJeu[i+k][j-k] = val then // on compte le nombre de même symbole d'affilée
-                        qteG := qteG+1
-                    else 
-                        break;
             end;
 
             // on peut sortir plus tôt de la boucle
-            if (qteD = app.n) or (qteG = app.n) then begin 
+            if qteD = app.n then begin 
                 checkDiago := true; // on passe la veleur à true car n pions sont alignés
                 break;
+            end;
+        end;
+
+        if not checkDiago then begin 
+            for j := app.n - 1 to app.largeurGrille - app.n do begin // colonne de départ (on retire n pour ne pas dépasser de la grille)
+                qteG := 0;
+                val := app.grilleJeu[i][j]; // valeur de référence
+                
+                if val <> CASE_VIDE then begin // on vérifie que la première case ne soit pas une case vide 
+                    // on vérifie la colonne montante gauche
+                    for k:=0 to app.n - 1 do // on parcourt les n colonnes à gauche pour voir si les pions se succèdent en diagonale montanten gauche
+                        if app.grilleJeu[i+k][j-k] = val then // on compte le nombre de même symbole d'affilée
+                            qteG := qteG+1
+                        else 
+                            break;
+                end;
+
+                // on peut sortir plus tôt de la boucle
+                if qteG = app.n then begin 
+                    checkDiago := true; // on passe la veleur à true car n pions sont alignés
+                    break;
+                end;
             end;
         end;
 
