@@ -4,8 +4,8 @@ interface
 
 uses 
     sysutils,
-    {$ifdef unix}cthreads,{$endif}
-    sdl2 in 'affichage/SDL2/units/sdl2.pas';
+    //sdl2 in 'affichage/SDL2/units/sdl2.pas';
+    sdl2;
 
 const MAX_ITER = 50;
 

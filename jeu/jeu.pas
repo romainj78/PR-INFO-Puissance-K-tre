@@ -5,7 +5,8 @@ interface
 uses 
     types,
     sysutils,
-    sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    //sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    sdl2,
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas',

@@ -6,8 +6,10 @@ uses
     types,
     sysutils,
     Crt,
-    sdl2 in 'affichage/SDL2/units/sdl2.pas',
-    sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
+    //sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    //sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
+    sdl2,
+    sdl2_image;
 
 procedure affichage();
 procedure ecranVictoire();
