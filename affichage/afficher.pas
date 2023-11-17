@@ -121,6 +121,7 @@ begin
     if app.affichage.textures.fond = nil then Halt();
 
     // Chargement de la grille
+    nomFichier := StrAlloc(length('affichage/assets/Grille-Puissance-K-tre-N.png')+2)
     strpcopy(nomFichier, 'affichage/assets/Grille-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
     app.affichage.surfaces.grille := IMG_LOAD(nomFichier);
     if app.affichage.surfaces.grille = nil then Halt();
@@ -138,6 +139,7 @@ begin
     if app.affichage.surfaces.pionRouge = nil then Halt();
     app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
     if app.affichage.textures.pionRouge = nil then Halt();
+    StrDispose(nomFichier);
 
     // On initialise la taille du rectangle position
     app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;
