@@ -6,10 +6,10 @@ uses
     types,
     sysutils,
     Crt,
-    //sdl2 in 'affichage/SDL2/units/sdl2.pas',
-    //sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
-    sdl2,
-    sdl2_image;
+    sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
+    //sdl2,
+    //sdl2_image;
 
 procedure affichage();
 procedure ecranVictoire();
@@ -121,7 +121,7 @@ begin
     if app.affichage.textures.fond = nil then Halt();
 
     // Chargement de la grille
-    nomFichier := StrAlloc(length('affichage/assets/Grille-Puissance-K-tre-N.png')+2)
+    nomFichier := StrAlloc(length('affichage/assets/Grille-Puissance-K-tre-N.png')+2);
     strpcopy(nomFichier, 'affichage/assets/Grille-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
     app.affichage.surfaces.grille := IMG_LOAD(nomFichier);
     if app.affichage.surfaces.grille = nil then Halt();
