@@ -32,7 +32,7 @@ begin
     Randomize(); // pour les modes de jeu surprise et solo
 
     // si on a choisit le mode de jeu surprise, on initialise la grille piégée
-    if app.modeJeu = MODE_SURPRISE then
+    if app.modeSurprise then
         placerPieges();
 
     affichage();
@@ -53,7 +53,7 @@ begin
                         if col <> -1 then begin 
                             placerPion(col);
 
-                            if app.modeJeu = MODE_SURPRISE then
+                            if app.modeSurprise then
                                 actionPieges(col);
 
                             changementJoueur();

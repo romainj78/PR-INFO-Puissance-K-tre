@@ -7,10 +7,6 @@ uses
     sysutils,
     afficher in 'affichage/afficher.pas';
 
-const PIEGE_CHANGEMENT_COULEUR = 1;
-const PIEGE_DISPARITION = 2;
-const PIEGE_DESTRUCTION_COLONNE = 3;
-
 procedure placerPieges();
 procedure actionPieges(col: ShortInt);
 function checkSupperposition(x, y: ShortInt): Boolean;
@@ -49,8 +45,8 @@ begin
     // puis on vérifie si le pion posé supperpose un piège
     if checkSupperposition(x, col) then begin
         // on affiche d'abord la grille pendant 800ms avant d'actionner le piège
-        affichage();
-        sleep(800);
+        afficherPiege(app.grillePiegee[x][col]);
+        sleep(1000);
 
         // puis on actionne le piège 
         case app.grillePiegee[x][col] of 

@@ -21,6 +21,7 @@ begin
     writeln('Hello World!');    
 
     choixMode();
+    choixModeSurprise();
     choixN();
     initSDL();
     jouer();

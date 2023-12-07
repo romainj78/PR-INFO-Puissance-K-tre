@@ -5,6 +5,7 @@ interface
 uses types;
 
 procedure choixMode();
+procedure choixModeSurprise();
 procedure choixN();
 
 implementation
@@ -16,16 +17,31 @@ begin
 
     writeln('Choix du mode :');
     writeln('  1) Mode Un contre un');
-    writeln('  2) Mode Surprise');
-    writeln('  3) Mode Contre l''ordinateur (facile)');
+    //writeln('  2) Mode Surprise');
+    writeln('  2) Mode Contre l''ordinateur (facile)');
+    //writeln('  3) Mode contre l''ordinateur (difficile)');
     writeln();
 
     repeat
         write('Votre choix : ');
         readln(choix);
-    until (choix = MODE_UNCONTREUN) or (choix = MODE_SURPRISE) or (choix = MODE_SOLO);
+    until (choix = MODE_UNCONTREUN) or (choix = MODE_SOLO);
 
     app.modeJeu := choix;
+end;
+
+procedure choixModeSurprise();
+var choix: String;
+begin
+    repeat
+        write('Voulez-vous jouer en mode surprise ? (y/n) ');
+        readln(choix);
+    until (choix = 'y') or (choix = 'n');
+
+    if choix = 'y' then 
+        app.modeSurprise := true 
+    else 
+        app.modeSurprise := false;
 end;
 
 procedure choixN();

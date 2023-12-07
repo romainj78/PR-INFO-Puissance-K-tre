@@ -15,6 +15,7 @@ procedure affichage();
 procedure ecranVictoire();
 procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
+procedure afficherPiege(piege: ShortInt);
 procedure initSDL();
 procedure detruireSDL();
 
@@ -97,6 +98,27 @@ begin
     
 end;
 
+procedure afficherPiege(piege: ShortInt);
+begin
+    // Affichage terminal 
+    case piege of 
+        PIEGE_CHANGEMENT_COULEUR: writeln('Piège changement de couleur !');
+        PIEGE_DESTRUCTION_COLONNE: writeln('Piège destruction de colonne !');
+        PIEGE_DISPARITION: writeln('Piège disparition du pion !');
+    end;
+
+    // Affichage SDL
+    affichage();
+
+    case piege of 
+        PIEGE_CHANGEMENT_COULEUR: SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.piegeChangementCouleur, nil, nil);
+        PIEGE_DESTRUCTION_COLONNE: SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.piegeDestructionColonne, nil, nil);
+        PIEGE_DISPARITION: SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.piegeDisparitionPion, nil, nil);
+    end;
+
+    SDL_RenderPresent(app.affichage.renderer);
+end;
+
 procedure initSDL();
 var nomFichier: PChar;
 begin
@@ -140,6 +162,20 @@ begin
     app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
     if app.affichage.textures.pionRouge = nil then Halt();
     StrDispose(nomFichier);
+
+    // Chargement des pièges
+    app.affichage.surfaces.piegeChangementCouleur := IMG_LOAD('affichage/assets/Texte-Piege-ChangementCouleur.png');
+    if app.affichage.surfaces.piegeChangementCouleur = nil then Halt();
+    app.affichage.textures.piegeChangementCouleur := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.piegeChangementCouleur);
+    if app.affichage.textures.piegeChangementCouleur = nil then Halt();
+    app.affichage.surfaces.piegeDestructionColonne := IMG_LOAD('affichage/assets/Texte-Piege-DestructionColonne.png');
+    if app.affichage.surfaces.piegeDestructionColonne = nil then Halt();
+    app.affichage.textures.piegeDestructionColonne := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.piegeDestructionColonne);
+    if app.affichage.textures.piegeDestructionColonne = nil then Halt();
+    app.affichage.surfaces.piegeDisparitionPion := IMG_LOAD('affichage/assets/Texte-Piege-DisparitionPion.png');
+    if app.affichage.surfaces.piegeDisparitionPion = nil then Halt();
+    app.affichage.textures.piegeDisparitionPion := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.piegeDisparitionPion);
+    if app.affichage.textures.piegeDisparitionPion = nil then Halt();
 
     // On initialise la taille du rectangle position
     app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;
