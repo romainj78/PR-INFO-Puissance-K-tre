@@ -54,6 +54,10 @@ type Jeu = record
             piegeChangementCouleur: PSDL_Surface;
             piegeDestructionColonne: PSDL_Surface;
             piegeDisparitionPion: PSDL_Surface;
+            victoireJoueur1: PSDL_Surface;
+            victoireJoueur2: PSDL_Surface;
+            victoireJoueur3: PSDL_Surface;
+            victoireMatchNul: PSDL_Surface;
         end;
         textures: record 
             fond: PSDL_Texture;
@@ -63,6 +67,10 @@ type Jeu = record
             piegeChangementCouleur: PSDL_Texture;
             piegeDestructionColonne: PSDL_Texture;
             piegeDisparitionPion: PSDL_Texture;
+            victoireJoueur1: PSDL_Texture;
+            victoireJoueur2: PSDL_Texture;
+            victoireJoueur3: PSDL_Texture;
+            victoireMatchNul: PSDL_Texture;
         end;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
         renderer: PSDL_Renderer;

@@ -5,6 +5,7 @@ interface
 uses 
     types,
     sysutils,
+    logique_commune in 'jeu/logique_commune.pas',
     Crt,
     sdl2 in 'affichage/SDL2/units/sdl2.pas',
     sdl2_image in 'affichage/SDL2/units/sdl2_image.pas';
@@ -27,7 +28,8 @@ procedure affichage();
 var i, j: ShortInt;
 begin
     // AFFICHAGE CONSOLE
-    Clrscr();
+
+    //Clrscr();
 
     writeln();
     // bordure supérieure
@@ -78,14 +80,43 @@ begin
 end;
 
 procedure ecranVictoire();
+var loop: Boolean = true;
+var event: TSDL_Event;
 begin
     app.etape := ETAPE_FIN;
     
+    // Affichage console
+
     writeln();
     if app.victoire then
         writeln('Bravo Joueur ', app.joueur, ' ! Tu gagnes la partie !')
     else    
         writeln('Match nul...');
+
+    // Affichage SDL2
+
+    if app.victoire then begin 
+        if app.joueur = JOUEUR_1 then 
+            SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.victoireJoueur1, nil, nil)
+        else if app.joueur = JOUEUR_2 then 
+            SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.victoireJoueur2, nil, nil)
+        else 
+            SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.victoireJoueur3, nil, nil)
+    end else  
+        SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.victoireMatchNul, nil, nil);
+
+    SDL_RenderPresent(app.affichage.renderer);
+
+    // on boucle jusqu'à de que l'utilisateur clique sur la croix pour fermer la fenêtre et terminer le jeu 
+    while loop do begin
+        while SDL_PollEvent(@event) = 1 do begin
+            case event.type_ of
+                SDL_QUITEV: loop := false;
+            end;
+
+            SDL_Delay(50);
+        end;
+    end;
 end;
 
 procedure afficherGrille();
@@ -176,6 +207,24 @@ begin
     if app.affichage.surfaces.piegeDisparitionPion = nil then Halt();
     app.affichage.textures.piegeDisparitionPion := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.piegeDisparitionPion);
     if app.affichage.textures.piegeDisparitionPion = nil then Halt();
+
+    // Chargement des victoires/défaites
+    app.affichage.surfaces.victoireJoueur1 := IMG_LOAD('affichage/assets/Texte-Victoire-Joueur1.png');
+    if app.affichage.surfaces.victoireJoueur1 = nil then Halt();
+    app.affichage.textures.victoireJoueur1 := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.victoireJoueur1);
+    if app.affichage.textures.victoireJoueur1 = nil then Halt();
+    app.affichage.surfaces.victoireJoueur2 := IMG_LOAD('affichage/assets/Texte-Victoire-Joueur2.png');
+    if app.affichage.surfaces.victoireJoueur2 = nil then Halt();
+    app.affichage.textures.victoireJoueur2 := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.victoireJoueur2);
+    if app.affichage.textures.victoireJoueur2 = nil then Halt();
+    app.affichage.surfaces.victoireJoueur3 := IMG_LOAD('affichage/assets/Texte-Victoire-Joueur3.png');
+    if app.affichage.surfaces.victoireJoueur3 = nil then Halt();
+    app.affichage.textures.victoireJoueur3 := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.victoireJoueur3);
+    if app.affichage.textures.victoireJoueur3 = nil then Halt();
+    app.affichage.surfaces.victoireMatchNul := IMG_LOAD('affichage/assets/Texte-Victoire-MatchNul.png');
+    if app.affichage.surfaces.victoireMatchNul = nil then Halt();
+    app.affichage.textures.victoireMatchNul := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.victoireMatchNul);
+    if app.affichage.textures.victoireMatchNul = nil then Halt();
 
     // On initialise la taille du rectangle position
     app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;

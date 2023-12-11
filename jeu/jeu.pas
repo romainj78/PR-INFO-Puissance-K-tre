@@ -59,7 +59,7 @@ begin
                             changementJoueur();
                             checkVictoire();
 
-                            if (app.modeJeu = MODE_SOLO) and (app.joueur = JOUEUR_ORDI) then begin 
+                            if (not app.victoire) and (app.modeJeu = MODE_SOLO) and (app.joueur = JOUEUR_ORDI) then begin 
                                 affichage();
                                 sleep(300);
                                 col := choixOrdiAlea();
