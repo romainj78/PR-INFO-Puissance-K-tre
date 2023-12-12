@@ -17,6 +17,9 @@ procedure ecranVictoire();
 procedure afficherGrille();
 procedure afficherPions(grilleJeu: Grille);
 procedure afficherPiege(piege: ShortInt);
+procedure afficherChoixMode();
+procedure afficherChoixSurprise();
+procedure afficherChoixPuissance();
 procedure initSDL();
 procedure detruireSDL();
 
@@ -150,8 +153,26 @@ begin
     SDL_RenderPresent(app.affichage.renderer);
 end;
 
+procedure afficherChoixMode();
+begin 
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.choixMode, nil, nil);
+    SDL_RenderPresent(app.affichage.renderer);
+end;
+
+procedure afficherChoixSurprise();
+begin 
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.choixSurprise, nil, nil);
+    SDL_RenderPresent(app.affichage.renderer);
+end;
+
+procedure afficherChoixPuissance();
+begin 
+    SDL_RenderCopy(app.affichage.renderer, app.affichage.textures.choixPuissance, nil, nil);
+    SDL_RenderPresent(app.affichage.renderer);
+end;
+
 procedure initSDL();
-var nomFichier: PChar;
+//var nomFichier: PChar;
 begin
     // On initialise le sous-système vidéo
     if SDL_Init(SDL_INIT_VIDEO) < 0 then Halt();
@@ -173,7 +194,7 @@ begin
     app.affichage.textures.fond := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.fond);
     if app.affichage.textures.fond = nil then Halt();
 
-    // Chargement de la grille
+    {// Chargement de la grille
     nomFichier := StrAlloc(length('affichage/assets/Grille-Puissance-K-tre-N.png')+2);
     strpcopy(nomFichier, 'affichage/assets/Grille-Puissance-K-tre-N' + IntToStr(app.n) + '.png');
     app.affichage.surfaces.grille := IMG_LOAD(nomFichier);
@@ -192,7 +213,7 @@ begin
     if app.affichage.surfaces.pionRouge = nil then Halt();
     app.affichage.textures.pionRouge := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.pionRouge);
     if app.affichage.textures.pionRouge = nil then Halt();
-    StrDispose(nomFichier);
+    StrDispose(nomFichier);}
 
     // Chargement des pièges
     app.affichage.surfaces.piegeChangementCouleur := IMG_LOAD('affichage/assets/Texte-Piege-ChangementCouleur.png');
@@ -226,9 +247,23 @@ begin
     app.affichage.textures.victoireMatchNul := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.victoireMatchNul);
     if app.affichage.textures.victoireMatchNul = nil then Halt();
 
-    // On initialise la taille du rectangle position
+    // Chargement des écrans de début 
+    app.affichage.surfaces.choixMode := IMG_LOAD('affichage/assets/Ecran-Choix-Mode.png');
+    if app.affichage.surfaces.choixMode = nil then Halt();
+    app.affichage.textures.choixMode := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.choixMode);
+    if app.affichage.textures.choixMode = nil then Halt();
+    app.affichage.surfaces.choixSurprise := IMG_LOAD('affichage/assets/Ecran-Choix-Surprise.png');
+    if app.affichage.surfaces.choixSurprise = nil then Halt();
+    app.affichage.textures.choixSurprise := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.choixSurprise);
+    if app.affichage.textures.choixSurprise = nil then Halt();
+    app.affichage.surfaces.choixPuissance := IMG_LOAD('affichage/assets/Ecran-Choix-Puissance.png');
+    if app.affichage.surfaces.choixPuissance = nil then Halt();
+    app.affichage.textures.choixPuissance := SDL_CreateTextureFromSurface(app.affichage.renderer, app.affichage.surfaces.choixPuissance);
+    if app.affichage.textures.choixPuissance = nil then Halt();
+
+    {// On initialise la taille du rectangle position
     app.affichage.posPion.w := (550 div app.hauteurGrille) - 20;
-    app.affichage.posPion.h := (550 div app.hauteurGrille) - 20;
+    app.affichage.posPion.h := (550 div app.hauteurGrille) - 20;}
 end;
 
 procedure detruireSDL();

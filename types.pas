@@ -58,6 +58,9 @@ type Jeu = record
             victoireJoueur2: PSDL_Surface;
             victoireJoueur3: PSDL_Surface;
             victoireMatchNul: PSDL_Surface;
+            choixMode: PSDL_Surface;
+            choixSurprise: PSDL_Surface;
+            choixPuissance: PSDL_Surface;
         end;
         textures: record 
             fond: PSDL_Texture;
@@ -71,6 +74,9 @@ type Jeu = record
             victoireJoueur2: PSDL_Texture;
             victoireJoueur3: PSDL_Texture;
             victoireMatchNul: PSDL_Texture;
+            choixMode: PSDL_Texture;
+            choixSurprise: PSDL_Texture;
+            choixPuissance: PSDL_Texture;
         end;
         rects: Array[1..MAX_ITER] of TSDL_Rect;
         renderer: PSDL_Renderer;

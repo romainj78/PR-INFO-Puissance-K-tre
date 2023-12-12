@@ -20,10 +20,10 @@ uses
 begin
     writeln('Hello World!');    
 
+    initSDL();
     choixMode();
     choixModeSurprise();
     choixN();
-    initSDL();
     jouer();
     detruireSDL();
 
