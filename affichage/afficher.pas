@@ -277,6 +277,27 @@ begin
     SDL_FreeSurface(app.affichage.surfaces.pionJaune);
     SDL_DestroyTexture(app.affichage.textures.pionRouge);
     SDL_FreeSurface(app.affichage.surfaces.pionRouge);
+    SDL_DestroyTexture(app.affichage.textures.piegeChangementCouleur);
+    SDL_FreeSurface(app.affichage.surfaces.piegeChangementCouleur);
+    SDL_DestroyTexture(app.affichage.textures.piegeDestructionColonne);
+    SDL_FreeSurface(app.affichage.surfaces.piegeDestructionColonne);
+    SDL_DestroyTexture(app.affichage.textures.piegeDisparitionPion);
+    SDL_FreeSurface(app.affichage.surfaces.piegeDisparitionPion);
+    SDL_DestroyTexture(app.affichage.textures.victoireJoueur1);
+    SDL_FreeSurface(app.affichage.surfaces.victoireJoueur1);
+    SDL_DestroyTexture(app.affichage.textures.victoireJoueur2);
+    SDL_FreeSurface(app.affichage.surfaces.victoireJoueur2);
+    SDL_DestroyTexture(app.affichage.textures.fond);
+    SDL_FreeSurface(app.affichage.surfaces.victoireJoueur3);
+    SDL_DestroyTexture(app.affichage.textures.fond);
+    SDL_FreeSurface(app.affichage.surfaces.victoireMatchNul);
+    SDL_DestroyTexture(app.affichage.textures.choixMode);
+    SDL_FreeSurface(app.affichage.surfaces.choixMode);
+    SDL_DestroyTexture(app.affichage.textures.choixSurprise);
+    SDL_FreeSurface(app.affichage.surfaces.choixSurprise);
+    SDL_DestroyTexture(app.affichage.textures.choixPuissance);
+    SDL_FreeSurface(app.affichage.surfaces.choixPuissance);
+    
     SDL_DestroyRenderer(app.affichage.renderer);
     SDL_DestroyWindow(app.affichage.window);
 
