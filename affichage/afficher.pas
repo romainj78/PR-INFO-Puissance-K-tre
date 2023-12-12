@@ -29,7 +29,7 @@ var i, j: ShortInt;
 begin
     // AFFICHAGE CONSOLE
 
-    //Clrscr();
+    Clrscr();
 
     writeln();
     // bordure supérieure
