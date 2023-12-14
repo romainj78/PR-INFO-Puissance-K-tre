@@ -6,6 +6,7 @@ uses
     types,
     sysutils,
     sdl2 in 'affichage/SDL2/units/sdl2.pas',
+    //sdl2,
     logique_commune in 'jeu/logique_commune.pas',
     logique_modeSurprise in 'jeu/logique_modeSurprise.pas',
     logique_modeSolo in 'jeu/logique_modeSolo.pas',
@@ -31,7 +32,7 @@ begin
     Randomize(); // pour les modes de jeu surprise et solo
 
     // si on a choisit le mode de jeu surprise, on initialise la grille piégée
-    if app.modeJeu = MODE_SURPRISE then
+    if app.modeSurprise then
         placerPieges();
 
     affichage();
@@ -52,16 +53,19 @@ begin
                         if col <> -1 then begin 
                             placerPion(col);
 
-                            if app.modeJeu = MODE_SURPRISE then
+                            if app.modeSurprise then
                                 actionPieges(col);
 
                             changementJoueur();
                             checkVictoire();
 
-                            if (app.modeJeu = MODE_SOLO) and (app.joueur = JOUEUR_ORDI) then begin 
+                            if (not app.victoire) and ((app.modeJeu = MODE_SOLO) or (app.modeJeu = MODE_SOLO_DIFF)) and (app.joueur = JOUEUR_ORDI) then begin 
                                 affichage();
                                 sleep(300);
-                                col := choixOrdiAlea();
+                                if app.modeJeu = MODE_SOLO then 
+                                    col := choixOrdiAlea()
+                                else  
+                                    col := choixOrdiDiff();
                                 placerPion(col);
                                 changementJoueur();
                                 checkVictoire();
