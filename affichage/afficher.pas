@@ -303,6 +303,9 @@ begin
 
     // On ferme la SDL2
     SDL_Quit();
+
+    // On quitte entièrement le programme
+    Halt();
 end;
 
 end.
